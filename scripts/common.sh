@@ -65,4 +65,4 @@ if [ "$(id -u)" -ne 0 ]; then
     SUDO='sudo'
 fi
 
-dotnet dev-certs https --clean --import $PFXFILE -p ""
+$SUDO dotnet dev-certs https --clean --import $PFXFILE -p ""

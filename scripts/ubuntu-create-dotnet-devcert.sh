@@ -10,4 +10,4 @@ echo $CRTFILE
 $SUDO cp $CRTFILE "/usr/local/share/ca-certificates"
 $SUDO update-ca-certificates
 
-cleanup
+# cleanup

@@ -21,6 +21,11 @@ In addition the certificate will be imported into dotnet so that it will be used
 ## Usage
 
 Simply run the script needed for your distribution.
+```
+chmod +x common.sh
+chmod +x ubuntu-create-dotnet-devcert.sh
+./ubuntu-create-dotnet-devcert.sh
+```
 
 Ubuntu based distributions:
 ```
@@ -28,8 +33,43 @@ sudo ./scripts/ubuntu-create-dotnet-devcert.sh
 ```
 
 Arch based distributions:
+```
 `./scripts/arch-create-dotnet-devcert`
-
+```
 ## More info
 
 More information about this can be found on my blog post [https://blog.wille-zone.de/post/aspnetcore-devcert-for-ubuntu](https://blog.wille-zone.de/post/aspnetcore-devcert-for-ubuntu).
+
+I also captures the self-signed certificate in many articles in to here you can read for more details
+* 
+
+# Extra steps to check and verify again
+
+```
+# Clean all HTTPS development certificates
+sudo dotnet dev-certs https --clean
+
+# Goto the generated certs tmp folder
+cd /var/tmp/localhost-dev-cert
+
+# Import PFX cert again (must use SUDO)
+sudo dotnet dev-certs https --clean --import dotnet-devcert.pfx -p ""
+
+# Verify cert using CA file (failed if the cert is not trusted)
+openssl verify -CAfile dotnet-devcert.crt dotnet-devcert.crt
+
+# remove previous trusted certificate
+sudo rm /etc/ssl/certs/dotnet-devcert.pem
+
+# copy the new cert
+cp dotnet-devcert.crt "/usr/local/share/ca-certificates"
+
+# update to trust cert
+sudo update-ca-certificates
+
+# check the pem file is generated
+ls /etc/ssl/certs/dotnet-devcert.pem
+
+# verify cert not using CAfile option
+openssl verify dotnet-devcert.crt
+```
