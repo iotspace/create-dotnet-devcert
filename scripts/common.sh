@@ -8,6 +8,8 @@ cleanup() {
     rm -R $TMP_PATH
 }
 
+cleanup()
+
 KEYFILE=$TMP_PATH/dotnet-devcert.key
 CRTFILE=$TMP_PATH/dotnet-devcert.crt
 PFXFILE=$TMP_PATH/dotnet-devcert.pfx

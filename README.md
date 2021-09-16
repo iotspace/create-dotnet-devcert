@@ -23,7 +23,9 @@ In addition the certificate will be imported into dotnet so that it will be used
 Simply run the script needed for your distribution.
 
 Ubuntu based distributions:
-`./scripts/ubuntu-create-dotnet-devcert`
+```
+sudo ./scripts/ubuntu-create-dotnet-devcert.sh
+```
 
 Arch based distributions:
 `./scripts/arch-create-dotnet-devcert`
